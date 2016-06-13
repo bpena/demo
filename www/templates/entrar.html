@@ -1,0 +1,25 @@
+<ion-view title="Entrar" id="page4" class=" ">
+    <ion-content padding="true" class="has-header">
+        <form name="loginForm" class="list " novalidate>
+            <ion-list id="entrar-list" class=" ">
+              <label class="item item-input " id="username">
+                <span class="input-label">Usuario</span>
+                <input type="text" placeholder="" ng-model="ctrl.username"
+                       name="username" required>
+              </label>
+              <label class="item item-input " id="password">
+                <span class="input-label">Contraseña</span>
+                <input type="password" placeholder="" ng-model="ctrl.password"
+                       name="password" required>
+              </label>
+            </ion-list>
+            <div class="padding" ng-if="ctrl.hasError">
+              <p ng-show="loginForm.username.$error.required">* El campo usuario es requerido</p>
+              <p ng-show="loginForm.password.$error.required">* El campo contraseña es requerido</p>
+            </div>
+            <div class="spacer" style="height: 40px;"></div>
+            <button id="entrar-button1" class=" button button-stable  button-block "
+              ng-click="ctrl.login()">Log in</button>
+        </form>
+    </ion-content>
+</ion-view>
