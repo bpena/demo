@@ -16,7 +16,6 @@ angular.module('app.services', [])
   }
 
   var service = {
-    isGuest: isGuest,
     login: login,
     logout: logout,
     registerObserver: registerObserverCallback,
@@ -35,25 +34,21 @@ angular.module('app.services', [])
     })
   }
 
-  function isGuest() {
-    return username == 'guest';
-  }
-
   function login(user, pass) {
     var deferred = $q.defer();
     var _user = user;
     var _pass = pass;
     $timeout(function () {
-      if (_user == _pass) {
-        username = _user;
-        session.currentUser = UserService.getUser(_user);
+      var currentUser = UserService.getUserByCredentials(_user, _pass);
+      if (user) {
+        session.currentUser = currentUser;
         session.username = _user;
         session.isGuest = false;
       }
 
       notifyObservers();
 
-      deferred.resolve(_user == _pass);
+      deferred.resolve(currentUser != null);
     });
 
     return deferred.promise;
@@ -146,7 +141,8 @@ angular.module('app.services', [])
 
 .factory('UserService', [function() {
   var service = {
-    getUser: getUser
+    getUser: getUser,
+    getUserByCredentials: getUserByCredentials
   }
 
   var users = [
@@ -178,6 +174,16 @@ angular.module('app.services', [])
       if (user.username == username)
         _user = user;
     });
+    return _user;
+  }
+
+  function getUserByCredentials(username, password) {
+    var _user = null;
+    users.forEach(function(user) {
+      if (user.username == username && user.password == password)
+        _user = user;
+    })
+
     return _user;
   }
 }])
