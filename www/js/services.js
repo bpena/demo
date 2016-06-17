@@ -5,16 +5,22 @@ angular.module('app.services', [])
 .service('BlankService', [function(){
 }])
 
-.factory('SessionService', ['$q', '$timeout', function($q, $timeout) {
+.factory('SessionService', ['$q', '$timeout', 'UserService', function($q, $timeout, UserService) {
 
   var username = 'guest';
   var observerCallbacks = [];
+  var session = {
+    username : 'guest',
+    currentUser : null,
+    isGuest : true
+  }
 
   var service = {
     isGuest: isGuest,
     login: login,
     logout: logout,
-    registerObserver: registerObserverCallback
+    registerObserver: registerObserverCallback,
+    session: session
   };
 
   return service;
@@ -35,14 +41,19 @@ angular.module('app.services', [])
 
   function login(user, pass) {
     var deferred = $q.defer();
-
-    $timeout(function (user, pass) {
-      if (user == pass)
-        username = user;
+    var _user = user;
+    var _pass = pass;
+    $timeout(function () {
+      if (_user == _pass) {
+        username = _user;
+        session.currentUser = UserService.getUser(_user);
+        session.username = _user;
+        session.isGuest = false;
+      }
 
       notifyObservers();
 
-      deferred.resolve(user == pass);
+      deferred.resolve(_user == _pass);
     });
 
     return deferred.promise;
@@ -50,14 +61,17 @@ angular.module('app.services', [])
 
   function logout() {
     username = 'guest';
-
+    session.username = 'guest';
+    session.user = null;
+    session.isGuest = true;
     notifyObservers();
   }
 }])
 
-.factory('OwnershipService', [function() {
+.factory('OwnershipService', ['$filter', function($filter) {
   var service = {
-    getList: getList
+    getList: getList,
+    getListByUser: getListByUser
   };
 
   var ownerships = [
@@ -116,6 +130,55 @@ angular.module('app.services', [])
 
   function getList() {
     return ownerships;
+  }
+
+  function getListByUser(user) {
+    var list = [];
+    ownerships.forEach(function(ownership) {
+      user.ownership.forEach(function (id) {
+        if (id == ownership.id)
+          list.push(ownership)
+      });
+    });
+    return list;
+  }
+}])
+
+.factory('UserService', [function() {
+  var service = {
+    getUser: getUser
+  }
+
+  var users = [
+    {
+      id: 1,
+      username: 'admin',
+      password: 'admin',
+      ownership: ['promotora-tantalo', 'trinitarias', 'la-granja']
+    },
+    {
+      id: 2,
+      username: 'bpena',
+      password: 'nano123',
+      ownership: ['trinitarias-suite']
+    },
+    {
+      id: 3,
+      username: 'acobis',
+      password: 'cobis123',
+      ownership: ['expreso-trinidad', 'expreso-chacaito', 'expreso-baruta']
+    }
+  ];
+
+  return service;
+
+  function getUser(username) {
+    var _user = null;
+    users.forEach(function(user) {
+      if (user.username == username)
+        _user = user;
+    });
+    return _user;
   }
 }])
 

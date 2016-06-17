@@ -1,17 +1,17 @@
 <ion-view title="Inicio" id="page5" class=" ">
     <ion-content padding="true" class="has-header">
       <div class="responsive-wrap">
-        <div class="col col-25" ng-repeat="ownership in ctrl.ownerships">
+        <div class="cols" ng-repeat="ownership in ctrl.ownerships">
           <div class="list card " id="{{ownership.id}}-card">
             <div style="margin: 0px; text-align: center;
-              background-color: rgb(232, 235, 239); height: 180px;">
+              background-color: rgb(232, 235, 239);">
               <img width="100%" src="../img/logos/{{ownership.image}}">
             </div>
-            <div class="item item-body " id="{{ownership.id}}-container">
+            <!--div class="item item-body " id="{{ownership.id}}-container">
               <p id="{{ownership.id}}-tantalo" style="margin-top:0px;color:#000000;" class=" ">
                 {{ownership.name}}
               </p>
-            </div>
+            </div-->
           </div>
         </div>
       </div>

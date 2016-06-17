@@ -1,3 +1,22 @@
 <ion-view title="Indicadores" id="page1" class=" ">
-    <ion-content padding="true" class="has-header"></ion-content>
+    <ion-content padding="true" class="has-header">
+      <div class="card">
+        <div class="item item-divider">
+          A line chart
+        </div>
+        <div class="item item-text-wrap">
+          <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series"
+                  chart-options="{showTooltips: false}"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-divider">
+          A bar chart
+        </div>
+        <div class="item item-text-wrap">
+          <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series"
+                  chart-options="{showTooltips: false}"></canvas>
+        </div>
+      </div>
+    </ion-content>
 </ion-view>

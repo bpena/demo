@@ -15,12 +15,12 @@
         <ion-content padding="false" class="side-menu-left has-header">
             <ion-list id="menu-null" class=" ">
                 <ion-item id="menu-list-inicio" ui-sref="menu.inicio" menu-close="" class="  ">Inicio</ion-item>
-                <ion-item ng-if="!ctrl.isGuest" id="menu-list-indicadores" ui-sref="menu.indicadores" menu-close="" class="  ">Indicadores</ion-item>
-                <ion-item ng-if="!ctrl.isGuest" id="menu-list-eventos" ui-sref="menu.eventos" menu-close="" class="  ">Eventos</ion-item>
-                <ion-item ng-if="!ctrl.isGuest" id="menu-list-espacios" ui-sref="menu.espacios" menu-close="" class="  ">Espacios</ion-item>
-                <ion-item ng-if="ctrl.isGuest" class="item-icon-left  " id="menu-list-login" ui-sref="menu.entrar" menu-close="">
+                <ion-item ng-if="!ctrl.session.isGuest" id="menu-list-indicadores" ui-sref="menu.indicadores" menu-close="" class="  ">Indicadores</ion-item>
+                <ion-item ng-if="!ctrl.session.isGuest" id="menu-list-eventos" ui-sref="menu.eventos" menu-close="" class="  ">Eventos</ion-item>
+                <ion-item ng-if="!ctrl.session.isGuest" id="menu-list-espacios" ui-sref="menu.espacios" menu-close="" class="  ">Espacios</ion-item>
+                <ion-item ng-if="ctrl.session.isGuest" class="item-icon-left  " id="menu-list-login" ui-sref="menu.entrar" menu-close="">
                     <i class="icon ion-log-in"></i>Entrar</ion-item>
-                <ion-item ng-if="!ctrl.isGuest" class="item-icon-left  " id="menu-list-logout" ui-sref="menu.entrar" menu-close="" ng-click="ctrl.logout()">
+                <ion-item ng-if="!ctrl.session.isGuest" class="item-icon-left  " id="menu-list-logout" ui-sref="menu.inicio" menu-close="" ng-click="ctrl.logout()">
                     <i class="icon ion-log-out"></i>Salir</ion-item>
             </ion-list>
         </ion-content>
