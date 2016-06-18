@@ -2,7 +2,7 @@
     <ion-content padding="true" class="has-header">
       <div class="responsive-wrap">
         <div class="cols" ng-repeat="ownership in ctrl.ownerships">
-          <div class="list card " ng-click="ctrl.gotoLogin()" id="{{ownership.id}}-card">
+          <div class="list card " ng-click="ctrl.gotoLogin(ownership.id)" id="{{ownership.id}}-card">
             <div style="margin: 0px; text-align: center;
               background-color: rgb(232, 235, 239);">
               <img width="100%" src="img/logos/{{ownership.image}}">

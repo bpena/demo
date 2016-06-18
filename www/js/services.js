@@ -18,6 +18,7 @@ angular.module('app.services', [])
   var service = {
     login: login,
     logout: logout,
+    isOwner: isOwner,
     registerObserver: registerObserverCallback,
     session: session
   };
@@ -61,12 +62,17 @@ angular.module('app.services', [])
     session.isGuest = true;
     notifyObservers();
   }
+
+  function isOwner(ownershipId) {
+    return session.currentUser && session.currentUser.ownership.contains(ownershipId);
+  }
 }])
 
 .factory('OwnershipService', ['$filter', function($filter) {
   var service = {
     getList: getList,
-    getListByUser: getListByUser
+    getListByUser: getListByUser,
+    getById: getById
   };
 
   var ownerships = [
@@ -136,6 +142,16 @@ angular.module('app.services', [])
       });
     });
     return list;
+  }
+
+  function getById(id) {
+    var _ownership = null;
+    ownerships.forEach(function(ownership) {
+      if (id == ownership.id)
+        _ownership = ownership;
+    })
+
+    return _ownership;
   }
 }])
 

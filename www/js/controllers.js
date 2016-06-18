@@ -53,13 +53,18 @@ angular.module('app.controllers', [])
       vm.ownerships = OwnershipService.getListByUser(vm.session.currentUser);
   }
 
-  function gotoLogin() {
-    $ionicHistory.nextViewOptions({disableBack: true});
-    $state.go('menu.entrar');
+  function gotoLogin(negocioId) {
+    if (!SessionService.isOwner(negocioId)) {
+      $ionicHistory.nextViewOptions({disableBack: true});
+      $state.go('menu.entrar');
+    }
+    else {
+      gotoNegocio(negocioId);
+    }
   }
 
   function gotoNegocio(param) {
-    $ionicHistory.nextViewOptions({disableBack: true});
+    // $ionicHistory.nextViewOptions({disableBack: true});
     $state.go('menu.negocio', {param: param});
   }
 
@@ -67,24 +72,25 @@ angular.module('app.controllers', [])
   watchSessionStatus();
 })
 
-.controller('menuCtrl', function($scope, $state, $ionicSideMenuDelegate, SessionService) {
+.controller('menuCtrl', function($scope, $state, $ionicHistory, $ionicSideMenuDelegate, SessionService) {
   var vm = this;
   vm.logout = logout;
   vm.session = SessionService.session;
 
   function logout() {
     SessionService.logout();
+    $ionicHistory.nextViewOptions({disableBack: true});
     $ionicSideMenuDelegate.toggleLeft();
   }
 })
 
-.controller('negocioCtrl', function($scope, $stateParams) {
+.controller('negocioCtrl', function($scope, $stateParams, OwnershipService) {
   var vm = this;
-  vm.param = $stateParams;
+  vm.param = $stateParams.param;
+  vm.ownership = {}
 
   init();
   function init() {
-    console.log(vm.param);
-    console.log($stateParams);
+    vm.ownership = OwnershipService.getById(vm.param);
   }
 })
