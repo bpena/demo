@@ -57,6 +57,17 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('menu.negocio', {
+    url: '/negocio/{param}',
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/negocio.html',
+        controller: 'negocioCtrl',
+        controllerAs: 'ctrl'
+      }
+    }
+  })
+
   .state('menu.inicio', {
     url: '/inicio',
     views: {

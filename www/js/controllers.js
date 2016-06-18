@@ -23,9 +23,6 @@ angular.module('app.controllers', [])
   vm.password = '';
   vm.hasError = false;
 
-  $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
 
   vm.login = function() {
     vm.hasError = Utils.isEmpty(vm.username) || Utils.isEmpty(vm.password);
@@ -34,22 +31,36 @@ angular.module('app.controllers', [])
       SessionService.login(vm.username, vm.password)
         .then(function(value) {
           console.log(value);
-          if (value)
+          if (value) {
+            $ionicHistory.nextViewOptions({disableBack: true});
             $state.go('menu.inicio');
+          }
         });
   }
 })
 
-.controller('inicioCtrl', function($scope, OwnershipService, SessionService) {
+.controller('inicioCtrl', function($scope, $state, $ionicHistory, OwnershipService, SessionService) {
   var vm = this;
   vm.session = SessionService.session;
   vm.ownerships = OwnershipService.getList();
+  vm.gotoNegocio = gotoNegocio;
+  vm.gotoLogin = gotoLogin;
 
   function watchSessionStatus() {
     if (vm.session.isGuest)
       vm.ownerships = OwnershipService.getList();
     else
       vm.ownerships = OwnershipService.getListByUser(vm.session.currentUser);
+  }
+
+  function gotoLogin() {
+    $ionicHistory.nextViewOptions({disableBack: true});
+    $state.go('menu.entrar');
+  }
+
+  function gotoNegocio(param) {
+    $ionicHistory.nextViewOptions({disableBack: true});
+    $state.go('menu.negocio', {param: param});
   }
 
   SessionService.registerObserver(watchSessionStatus);
@@ -64,5 +75,16 @@ angular.module('app.controllers', [])
   function logout() {
     SessionService.logout();
     $ionicSideMenuDelegate.toggleLeft();
+  }
+})
+
+.controller('negocioCtrl', function($scope, $stateParams) {
+  var vm = this;
+  vm.param = $stateParams;
+
+  init();
+  function init() {
+    console.log(vm.param);
+    console.log($stateParams);
   }
 })
