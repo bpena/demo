@@ -1,11 +1,11 @@
 angular.module('app.controllers', [])
 
 .controller('indicadoresCtrl', function($scope) {
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
+  $scope.labels = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"];
+  $scope.series = ['Facturado', 'Cobrado'];
   $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
+    [65000, 59000, 80000, 81000, 56000, 5500, 40000],
+    [28000, 48000, 40000, 19000, 86000, 27000, 90000]
   ];
 })
 
