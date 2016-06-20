@@ -64,7 +64,7 @@ angular.module('app.services', [])
   }
 
   function isOwner(ownershipId) {
-    return session.currentUser && session.currentUser.ownership.contains(ownershipId);
+    return session.currentUser && session.currentUser.ownership.indexOf(ownershipId) >= 0 ;
   }
 }])
 

@@ -1,0 +1,24 @@
+<ion-view title="Indicadores" id="page3" class=" ">
+    <ion-content class="has-header">
+      <h4>Facturación</h4>
+      <ion-list>
+        <ion-item ng-if="item.grupo == 'Facturación'" ng-click="ctrl.goto(item)" ng-repeat="item in ctrl.opciones">
+          {{item.label}}
+        </ion-item>
+      </ion-list>
+
+      <h4>Estacionamiento</h4>
+      <ion-list>
+        <ion-item ng-if="item.grupo == 'Estacionamiento'" ng-click="ctrl.goto(item)" ng-repeat="item in ctrl.opciones">
+          {{item.label}}
+        </ion-item>
+      </ion-list>
+
+      <h4>Ingreso x M2</h4>
+      <ion-list>
+        <ion-item ng-if="item.grupo == 'Ingreso M2'" ng-click="ctrl.goto(item)" ng-repeat="item in ctrl.opciones">
+          {{item.label}}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+</ion-view>

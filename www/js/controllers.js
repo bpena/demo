@@ -9,12 +9,53 @@ angular.module('app.controllers', [])
   ];
 })
 
+.controller('indicadoresMenuCtrl', function($state) {
+  var vm = this;
+  vm.goto = goto;
+
+  vm.opciones = [
+    {
+      label: 'Facturación vs Cobro',
+      url: 'menu.indicadores',
+      grupo: 'Facturación'
+    },
+    {
+      label: 'Facturación x Local',
+      url: 'menu.indicadores',
+      grupo: 'Facturación'
+    },
+    {
+      label: 'Cant. de Vehículos',
+      url: 'menu.indicadores',
+      grupo: 'Estacionamiento'
+    },
+    {
+      label: 'Ingreso C.C. x M2',
+      url: 'menu.indicadores',
+      grupo: 'Ingreso M2'
+    }
+  ];
+
+  function goto(item) {
+    $state.go(item.url);
+  }
+})
+
 .controller('eventosCtrl', function($scope) {
 
 })
 
+
+.controller('eventosMenuCtrl', function() {
+  var vm = this;
+})
+
 .controller('espaciosCtrl', function($scope) {
 
+})
+
+.controller('espaciosMenuCtrl', function() {
+  var vm = this;
 })
 
 .controller('entrarCtrl', function($scope, $state, $ionicHistory, SessionService, Utils) {
@@ -66,7 +107,7 @@ angular.module('app.controllers', [])
   function gotoNegocio(param) {
     // $ionicHistory.nextViewOptions({disableBack: true});
     $state.go('menu.negocio', {param: param});
-  }
+   }
 
   SessionService.registerObserver(watchSessionStatus);
   watchSessionStatus();

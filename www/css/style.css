@@ -21,6 +21,14 @@
   padding: 10px 18px;
 }
 
+.list:last-child {
+  margin-bottom: 40px;
+}
+
+h4, .h4 {
+  padding-left: 10px !important;
+}
+
 @media only screen and (max-device-width: 567px) {
   .cols {
     width: 33% !important;

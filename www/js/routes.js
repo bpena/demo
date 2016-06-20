@@ -18,6 +18,17 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('menu.indicadores_menu', {
+    url: '/indicadores_menu',
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/indicadores_menu.html',
+        controller: 'indicadoresMenuCtrl',
+        controllerAs: 'ctrl'
+      }
+    }
+  })
+
   .state('menu.eventos', {
     url: '/eventos',
     views: {
@@ -28,12 +39,32 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('menu.eventos_menu', {
+    url: '/eventos_menu',
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/eventos_menu.html',
+        controller: 'eventosMenuCtrl'
+      }
+    }
+  })
+
   .state('menu.espacios', {
     url: '/espacios',
     views: {
       'side-menu21': {
         templateUrl: 'templates/espacios.html',
         controller: 'espaciosCtrl'
+      }
+    }
+  })
+
+  .state('menu.espacios_menu', {
+    url: '/espacios_menu',
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/espacios_menu.html',
+        controller: 'espaciosMenuCtrl'
       }
     }
   })
